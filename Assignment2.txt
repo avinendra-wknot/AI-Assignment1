@@ -1,0 +1,168 @@
+AI Assignment on Prompting
+
+Model used for  this assignment : llama3.2 
+commands: 
+--ollama pull llama3.2
+--ollama run llama3.2
+__________________________________________________________________________________________________________________
+1)system vs. user prompt
+
+system prompt:
+You are a customer-review classification assistant.
+Classify customer reviews as Positive, Negative, or Neutral.
+Always provide a short explanation for your classification.
+
+output:
+I'm ready to help. Please go ahead and provide the customer review you'd like me to classify.
+
+user prompt:
+Review:
+... "The delivery was fast and the product quality is excellent."
+...
+... Classify this review.
+
+output:
+Classification: Positive
+
+Explanation: The reviewer mentions two specific strengths of their experience: the speed of delivery and the high quality of
+the product, both of which are positive indicators of their satisfaction.
+
+understanding:The system prompt establishes the model's general behavior and task, while the user prompt provides the specific input to be processed.
+_____________________________________________________________________________________________________________________________
+2)Zero-shot prompting
+
+Input prompt:
+Classify the following customer review as exactly one of:
+Positive, Negative, or Neutral.
+
+Review:
+"The delivery was fast and the product quality is excellent."
+
+Return only the classification.
+
+Output:
+Positive
+__________________________________________________________________________________________________________
+3)Few-shot prompting
+
+Input prompt:
+Classify customer reviews as Positive, Negative, or Neutral.
+
+Example 1:
+Review: "The product is amazing and I am very happy with it."
+Classification: Positive
+
+Example 2:
+Review: "The product arrived broken and customer support was unhelpful."
+Classification: Negative
+
+Example 3:
+Review: "The product is okay. It works, but there is nothing special about it."
+Classification: Neutral
+
+Now classify the following review:
+
+Review:
+"The delivery was fast and the product quality is excellent."
+
+Return only the classification.
+
+Output: Positive
+________________________________________________________________________________________________________________
+4)Role prompting
+
+ROLE : TEACHER
+Input prompt:
+>>> You are a teacher explaining Large Language Model concepts to a beginner.
+...
+... Explain what a decoder is in a Large Language Model (LLM).
+...
+... Assume the learner understands the basic idea of tokens and neural networks but has not yet studied the Transformer architecture
+... in depth.
+...
+... Explain it in simple language and use a real-world analogy. Then give a basic technical explanation of how a decoder processes to
+... kens to generate the next token.
+...
+... Avoid unnecessary mathematical details.
+... Keep the response short and simple, 2-3 paragraphs.
+
+Output:
+Imagine you're trying to tell a friend a story, but you leave the ending out. They ask you what happens next, and you don't
+know. So, you give them some clues to help them guess. In a Large Language Model (LLM), the decoder is like a helper that takes
+these clues (or tokens) and uses them to make an educated guess about what the next token should be.
+
+Think of the decoder as a "story completion machine". It receives a sequence of tokens (like words) from the input, and it
+tries to figure out what the next token should be to make a coherent story. The decoder uses its knowledge of language patterns
+and relationships to make a prediction, and then generates the next token. This process is repeated until the entire story is
+completed.
+
+In technical terms, the decoder processes tokens one by one, using a neural network to predict the next token based on the
+previous ones. The neural network looks at the patterns and relationships between the tokens and outputs a probability
+distribution over all possible next tokens. The token with the highest probability is chosen as the next token to generate.
+This process is called "beam search", where the decoder generates a list of possible next tokens and chooses the best one. The
+decoder's goal is to produce a coherent and meaningful output that makes sense in the context of the conversation or story.
+
+
+ROLE : SENIOR AI/ML ENGINEER
+
+Input prompt:
+>>> You are a senior AI/ML engineer with expertise in Large Language Models and Transformer architectures.
+...
+... Explain what a decoder is in a Large Language Model (LLM).
+...
+... Cover its role in next-token prediction, self-attention, causal masking, positional information, feed-forward networks, residual
+... connections, and how multiple decoder layers work together to generate the output.
+...
+... Assume the reader has a basic understanding of tokens and neural networks. Use technically accurate terminology and explain the d
+... ata flow clearly.
+... Keep  the response short and simple, 2-3 paragraphs
+
+Output:
+The decoder is a critical component of a Large Language Model (LLM), responsible for generating the next token in a sequence to
+complete a sentence, paragraph, or document. Its primary role is to perform next-token prediction, which involves predicting
+the probability distribution over all possible next tokens given the input tokens. This is achieved through self-attention, a
+mechanism that allows the decoder to weigh the importance of different input tokens when generating the next token.
+
+The decoder also employs causal masking to prevent the model from considering future tokens when generating the next token.
+Additionally, it incorporates positional information to maintain context and track the sequence of tokens. The output of the
+decoder is further processed by a feed-forward network (FFN) and combined with the output of the encoder through a residual
+connection, allowing the decoder to refine its predictions and improve the overall coherence of the generated output. The
+decoder layers work together to progressively generate the next tokens, with each layer building upon the previous one to
+create a more accurate and context-dependent output.
+
+The decoder architecture can be thought of as a series of independent sub-modules, each responsible for a specific aspect of
+next-token prediction. The multiple decoder layers work together to generate the output by iterating through the input sequence
+and generating one token at a time. The output of each layer is fed into the next layer, allowing the decoder to refine its
+predictions and generate a coherent and context-dependent output. This hierarchical structure enables the decoder to capture
+long-range dependencies and relationships in the input sequence, resulting in more accurate and natural language generation.
+
+
+ROLE: COMPANY CEO
+Input prompt:
+>>> You are a technology-focused CEO explaining AI concepts to business stakeholders who have no deep technical background.
+...
+... Explain what a decoder is in a Large Language Model (LLM).
+...
+... Focus on what the decoder does, why it is important for generating text, and how it contributes to the capabilities of modern LLM
+... s.
+...
+... Use simple business-friendly language and avoid mathematical and highly technical details. Include one simple analogy.
+... Keep the response short and simple, 2-3 paragraphs
+
+Output:
+The decoder is a crucial component of a Large Language Model (LLM). Think of it like a "completion expert" that takes the
+model's output and predicts the next word, sentence, or paragraph to create a coherent and natural-sounding text. The decoder
+is responsible for filling in the gaps in the input sequence, making it possible for the model to generate text that makes
+sense and is contextually relevant.
+
+The decoder is essential because it allows the LLM to generate text that is not only grammatically correct but also
+contextually relevant. Imagine you're writing a company blog post, and you want the AI to suggest the next sentence to make the
+text flow smoothly. The decoder helps the model do just that, providing a suggested sentence that is both coherent and
+engaging. This level of text completion enables the LLM to mimic human language and create content that resonates with our
+audience.
+
+In short, the decoder is a key enabler of modern LLM capabilities. By predicting the next token in a sequence, it allows the
+model to generate text that is not only coherent but also contextually relevant. This capability is critical for applications
+like content generation, language translation, and chatbots, where the ability to generate human-like text is essential. The
+decoder's ability to complete the input sequence makes all the difference in creating high-quality, engaging content that
+resonates with our audience.
